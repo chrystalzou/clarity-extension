@@ -5,7 +5,7 @@ import SetGoal from './SetGoal.jsx';
 import Timer from './Timer.jsx';
 import BlockedSites from './BlockedSites.jsx';
 import DecideOnBreakPage from './DecideOnBreakPage.jsx';
-// import BreakPage from './BreakPage.jsx';
+import BreakPage from './BreakPage.jsx';
 import './exampleData.js';
 
 const backgroundImages = {
