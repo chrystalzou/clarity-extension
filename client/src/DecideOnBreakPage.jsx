@@ -40,12 +40,7 @@ class DecideOnBreakPage extends React.Component {
           </label>
           <input className="form-button" type="submit" value="Submit" />
         </form>
-        <div id="decide-on-break">
-          <h2>Give yourself a pat on the back! These are all the goals you've accomplished so far:</h2>
-          <p>Writing out CRUD endpoints for API</p>
-          <p>Scheduling a recruiter call</p>
-          <p>Chapter 4 of CTCI</p>
-        </div>
+
       </div>
     )
   }

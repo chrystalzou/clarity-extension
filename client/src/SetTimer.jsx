@@ -13,7 +13,15 @@ class SetTimer extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({value: Math.floor(event.target.value)});
+    if (event.target.value < 1) {
+      this.setState({
+        value: ''
+      });
+    } else {
+      this.setState({
+        value: Math.floor(event.target.value)
+      });
+    }
   }
   
   handleSubmit(event) {

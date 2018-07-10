@@ -125,6 +125,7 @@ class Timer extends React.Component {
     return (
       <div>
         <div id="timer">
+          <h1>{this.props.state.goal}:</h1>
           <h1>{minutes} {seconds}</h1>
         </div>
         {button1}
