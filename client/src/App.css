@@ -1,6 +1,7 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: Arial, 'Roboto', sans-serif;
   color: #ffffff;
+  text-shadow: 1px 1px #808080;
   height: 100%;
   max-height: 100%;
   margin: 0;
@@ -9,25 +10,55 @@ body {
 
 h1 {
   font-size: 40px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 1px 1px #808080;
+}
+
+h2 {
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: 1px 1px #808080;
 }
 
 input {
-  text-align: left;
+  text-align: center;
+  color: #ffffff;
+  background: transparent;
+  padding: 5px;
+  padding-bottom: 0px;
+  font-size: 20px;
   width: 400px;
   height: 30px;
   border: none;
-  border-bottom: 1px solid #000000;
+  border-bottom: 3px solid #ffffff;
+  outline: none;
+}
+
+select {
+  text-align: center;
+  color: #ffffff;
+  background: transparent;
+  padding: 5px;
+  padding-bottom: 0px;
+  font-size: 20px;
+  width: 400px;
+  height: 30px;
+  border: none;
+  border-bottom: 3px solid #ffffff;
+  outline: none;
 }
 
 button {
   background-color: grey;
-  font-size: 10px;
+  text-align: center;
+  font-size: 20px;
   color: white;
   border: 1px solid white;
   padding: 3px;
   margin: 20px;
-  width: 40px;
-  height: 25px;
+  width: 100px;
+  height: 40px;
 }
 
 .App {
@@ -45,13 +76,13 @@ button {
 .form-button {
   background-color: grey;
   text-align: center;
-  font-size: 10px;
+  font-size: 15px;
   color: white;
   border: 1px solid white;
   padding: 3px;
   margin: 20px;
   width: 100px;
-  height: 25px;
+  height: 40px;
 }
 
 #background-image {
@@ -62,11 +93,18 @@ button {
   max-height: 100vh;
 }
 
-#form-set-time {
-  width: 100px;
+#decide-on-break {
   text-align: center;
+  width: 50%;
+  position: absolute;
+  left: 25%;
 }
 
+#form-set-time {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+}
 
 #timer {
   font-size: 55px;

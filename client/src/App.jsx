@@ -4,10 +4,14 @@ import SetTimer from './SetTimer.jsx';
 import SetGoal from './SetGoal.jsx';
 import Timer from './Timer.jsx';
 import BlockedSites from './BlockedSites.jsx';
+import DecideOnBreakPage from './DecideOnBreakPage.jsx';
+import BreakPage from './BreakPage.jsx'
+import './exampleData.js';
 
 const backgroundImages = {
   shanghai: 'http://i.imgur.com/cCnTqIf.jpg',
   antelopeCanyon: 'http://vunature.com/wp-content/uploads/2016/10/landscapes-texture-canyon-light-rocks-antelope-nature-hd-wallpapers-iphone-6.jpg',
+  goldenGate: 'https://i.imgur.com/onOkYGX.jpg',
 };
 
 const getRandomIntInclusive = (min, max) => {
@@ -16,31 +20,38 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 };
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundImage: Object.values(backgroundImages)[getRandomIntInclusive(0, Object.keys(backgroundImages).length - 1)],
+      currentUrl: window.location.href,
       setGoal: true,
+      goal: 'some goal',
       enterTime: false,
       blockedSitePage: false,
       blockedSites: [],
       timer: false,
       time: 30,
-      timerFinish: false,
-    }    
+      decideOnBreakPage: false,
+      breakPage: false,
+    }
+    
+    this.originalState = Object.assign({}, this.state);    
     
     this.handleSetGoalClick = this.handleSetGoalClick.bind(this);
     this.setTime = this.setTime.bind(this);
     this.addToList = this.addToList.bind(this);
     this.handleSetTimerClick = this.handleSetTimerClick.bind(this);
-    this.handleTimerFinishClick = this.handleTimerFinishClick.bind(this);
+    this.toggleDecideOnBreakPage = this.toggleDecideOnBreakPage.bind(this);
     this.toggleBlockedSitesPage = this.toggleBlockedSitesPage.bind(this);
+    this.toggleBreakPage = this.toggleBreakPage.bind(this);
+    this.resetApp = this.resetApp.bind(this);
   }
   
-  handleSetGoalClick() {
+  handleSetGoalClick(goal) {
     this.setState({
+      goal: goal,
       setGoal: !this.state.setGoal,
       enterTime: !this.state.enterTime,
     });
@@ -67,7 +78,6 @@ class App extends Component {
     this.setState({
       blockedSites: blockedSites,
     });
-    console.log(this.state.blockedSites);
   }
   
   handleSetTimerClick(time) {
@@ -77,12 +87,21 @@ class App extends Component {
     });
   }
   
-  handleTimerFinishClick() {
-    console.log('timer finished');
+  toggleDecideOnBreakPage() {
     this.setState({
       timer: !this.state.timer,
-      timerFinish: !this.state.timerFinish,
+      decideOnBreakPage: !this.state.decideOnBreakPage,
     });
+  }
+
+  toggleBreakPage() {
+    this.setState({
+      breakPage: !this.state.breakPage,
+    });
+  }
+
+  resetApp() {
+    this.setState(this.originalState);
   }
   
   render() {
@@ -90,7 +109,8 @@ class App extends Component {
     const enterTime = this.state.enterTime;
     const blockedSitePage = this.state.blockedSitePage;
     const timer = this.state.timer;
-    const timerFinish = this.state.timerFinish;
+    const decideOnBreakPage = this.state.decideOnBreakPage;
+    const breakPage = this.state.breakPage;
     let component;
 
     if (setGoal) {
@@ -106,7 +126,15 @@ class App extends Component {
     }
 
     if (timer) {
-      component = <Timer state={this.state} click={this.handleTimerFinishClick}/>
+      component = <Timer state={this.state} click={this.toggleDecideOnBreakPage}/>
+    }
+
+    if (decideOnBreakPage) {
+      component = <DecideOnBreakPage state={this.state} break={this.toggleBreakPage} reset={this.resetApp} />
+    }
+
+    if (breakPage) {
+      component = <BreakPage state={this.state}/>
     }
 
     return (
