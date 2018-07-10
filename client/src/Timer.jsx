@@ -1,11 +1,13 @@
 import React from 'react';
+import { runInThisContext } from 'vm';
 
 class Timer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      time: this.props.state.time,
+      minutes: this.props.state.time,
+      seconds: 0,
       goal: this.props.state.goal,
       startButton: true,
       resetButton: false,
@@ -23,9 +25,7 @@ class Timer extends React.Component {
   }
   
   startTimer() {
-    if (this.state.time > 1) {
-      this.intervalId = setInterval(this.finishTimer, 1000);
-    }
+    this.intervalId = setInterval(this.finishTimer, 1000);
   }
 
   clickStartButton() {
@@ -47,7 +47,7 @@ class Timer extends React.Component {
   }
   
   finishTimer() {
-    if (this.state.time === 0) {
+    if (this.state.minutes === 0 && this.state.seconds === 0) {
       alert(`Congratulations - you've finished the task: ${this.state.goal}!`);
       clearInterval(this.intervalId);
       this.setState({
@@ -55,9 +55,15 @@ class Timer extends React.Component {
         nextButton: true,
       });
     }
-    if (this.state.time > 0) {
+    if (this.state.minutes > 0 && this.state.seconds === 0) {
       this.setState({
-        time: this.state.time - 1,
+        minutes: this.state.minutes - 1,
+        seconds: 60,
+      });
+    }
+    if (this.state.seconds > 0) {
+      this.setState({
+        seconds: this.state.seconds - 1,
       });
     }
   }
@@ -65,7 +71,8 @@ class Timer extends React.Component {
   resetTimer() {
     clearInterval(this.intervalId);
     this.setState({
-      time: this.props.state.time,
+      minutes: this.props.state.time,
+      seconds: 0,
       nextButton: false,
       stopButton: false,
       startButton: true,
@@ -73,8 +80,31 @@ class Timer extends React.Component {
   }
 
   render() {
+    let minutes;
+    let seconds;
     let button1;
     let button2;
+
+    if (this.state.minutes === 0 && this.state.seconds === 0) {
+      minutes = `Timer`;
+      seconds = `Finished!`;
+    }
+
+    if (this.state.minutes > 1) {
+      minutes = `${this.state.minutes} minutes`;
+    } else if (this.state.minutes === 1) {
+      minutes = `1 minute`;
+    } else if (this.state.minutes === 0 && this.state.seconds > 0) {
+      minutes = ``;
+    }
+
+    if (this.state.seconds > 1) {
+      seconds = `${this.state.seconds} seconds`;
+    } else if (this.state.seconds === 1) {
+      seconds = `1 second`;
+    } else if (this.state.minutes > 0 && this.state.seconds === 0) {
+      seconds = ``;
+    }
 
     if (this.state.startButton) {
       button1 = <button className="form-button" onClick={this.clickStartButton}>Start</button>;
@@ -94,7 +124,9 @@ class Timer extends React.Component {
 
     return (
       <div>
-        <div id="timer">Timer: {this.state.time} seconds</div>
+        <div id="timer">
+          <h1>{minutes} {seconds}</h1>
+        </div>
         {button1}
         {button2}
       </div>

@@ -5,13 +5,14 @@ import SetGoal from './SetGoal.jsx';
 import Timer from './Timer.jsx';
 import BlockedSites from './BlockedSites.jsx';
 import DecideOnBreakPage from './DecideOnBreakPage.jsx';
-import BreakPage from './BreakPage.jsx'
+// import BreakPage from './BreakPage.jsx';
 import './exampleData.js';
 
 const backgroundImages = {
   shanghai: 'http://i.imgur.com/cCnTqIf.jpg',
   antelopeCanyon: 'http://vunature.com/wp-content/uploads/2016/10/landscapes-texture-canyon-light-rocks-antelope-nature-hd-wallpapers-iphone-6.jpg',
-  goldenGate: 'https://i.imgur.com/onOkYGX.jpg',
+  sanFrancisco: 'https://i.imgur.com/tKssiPz.jpg',
+  joshuaTree: 'http://i.imgur.com/HdPEtDE.jpg',
 };
 
 const getRandomIntInclusive = (min, max) => {
@@ -45,7 +46,7 @@ class App extends Component {
     this.handleSetTimerClick = this.handleSetTimerClick.bind(this);
     this.toggleDecideOnBreakPage = this.toggleDecideOnBreakPage.bind(this);
     this.toggleBlockedSitesPage = this.toggleBlockedSitesPage.bind(this);
-    this.toggleBreakPage = this.toggleBreakPage.bind(this);
+    // this.toggleBreakPage = this.toggleBreakPage.bind(this);
     this.resetApp = this.resetApp.bind(this);
   }
   
@@ -94,11 +95,11 @@ class App extends Component {
     });
   }
 
-  toggleBreakPage() {
-    this.setState({
-      breakPage: !this.state.breakPage,
-    });
-  }
+  // toggleBreakPage() {
+  //   this.setState({
+  //     breakPage: !this.state.breakPage,
+  //   });
+  // }
 
   resetApp() {
     this.setState(this.originalState);
@@ -110,7 +111,7 @@ class App extends Component {
     const blockedSitePage = this.state.blockedSitePage;
     const timer = this.state.timer;
     const decideOnBreakPage = this.state.decideOnBreakPage;
-    const breakPage = this.state.breakPage;
+    // const breakPage = this.state.breakPage;
     let component;
 
     if (setGoal) {
@@ -133,9 +134,9 @@ class App extends Component {
       component = <DecideOnBreakPage state={this.state} break={this.toggleBreakPage} reset={this.resetApp} />
     }
 
-    if (breakPage) {
-      component = <BreakPage state={this.state}/>
-    }
+    // if (breakPage) {
+    //   component = <BreakPage state={this.state}/>
+    // }
 
     return (
       <div>
