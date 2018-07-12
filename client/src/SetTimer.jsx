@@ -36,7 +36,7 @@ class SetTimer extends React.Component {
         <label>
           <h1>How long do you want to focus for?</h1>
           <p>Enter any number of minutes between 5 and 60</p>
-          <input id="form-set-time" type="number" value={this.state.value} min="1" onChange={this.handleChange}/>
+          <input id="form-set-time" type="number" value={this.state.value} min="1" max="60" onChange={this.handleChange}/>
         </label>
         <input className="form-button" type="submit" value="Submit" />
       </form>
